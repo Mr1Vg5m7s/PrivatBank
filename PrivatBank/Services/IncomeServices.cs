@@ -13,6 +13,10 @@ namespace PrivatBank.Services
         public void AddIncome(Income income)
         {
             incomes.Add(income);
+            if (income.Wallet != null)
+            {
+                income.Wallet.Balance += income.Sum;
+            }
         }
 
         public void DeleteIncome(int id)
@@ -21,8 +25,27 @@ namespace PrivatBank.Services
 
             if (income != null)
             {
+                if (income.Wallet != null)
+                {
+                    income.Wallet.Balance -= income.Sum;
+                }
                 incomes.Remove(income);
             }
+        }
+        //доходы
+        public Income? GetIncome(int id)
+        {
+            return incomes.FirstOrDefault(i => i.Id == id);
+        }
+
+        public List<Income> GetAllIncomes()
+        {
+            return incomes;
+        }
+
+        public List<Income> GetIncomesByWallet(int walletId)
+        {
+            return incomes.Where(i => i.Wallet?.Id == walletId).ToList();
         }
         ///// категории
         public void AddCategoryIncome(CategoryIncome categoryIncome)
@@ -39,6 +62,15 @@ namespace PrivatBank.Services
                 categories.Remove(category);
             }
         }
+        //
+        public CategoryIncome? GetCategoryIncome(int id)
+        {
+            return categories.FirstOrDefault(c => c.Id == id);
+        }
 
+        public List<CategoryIncome> GetAllCategoriesIncome()
+        {
+            return categories;
+        }
     }
 }
