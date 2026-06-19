@@ -50,7 +50,7 @@ namespace PrivatBank.Services
         ///// категории
         public void AddCategoryIncome(CategoryIncome categoryIncome)
         {
-            CategoryIncome category = categoryIncome;
+            categories.Add(categoryIncome);
         }
 
         public void DeleteCategory(int id)

@@ -49,7 +49,7 @@ namespace PrivatBank.Services
         /////категории
         public void AddCategoryExpense(CategoryExpense categoryExpense)
         {
-            CategoryExpense category = categoryExpense;
+            categories.Add(categoryExpense);
         }
 
         
