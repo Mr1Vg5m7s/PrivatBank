@@ -86,7 +86,7 @@ namespace PrivatBank.Controllers
             }
         }
 
-        #region Wallet Management
+   
 
         private void WalletMenu()
         {
@@ -255,9 +255,6 @@ namespace PrivatBank.Controllers
             ConsoleUI.Pause();
         }
 
-        #endregion
-
-        #region Income Management
 
         private void IncomeMenu()
         {
@@ -562,10 +559,7 @@ namespace PrivatBank.Controllers
             ConsoleUI.Pause();
         }
 
-        #endregion
-
-        #region Expense Management
-
+       
         private void ExpenseMenu()
         {
             while (true)
@@ -877,9 +871,7 @@ namespace PrivatBank.Controllers
             ConsoleUI.Pause();
         }
 
-        #endregion
-
-        #region Reports & Analytics
+       
 
         private void ReportsMenu()
         {
@@ -1104,11 +1096,7 @@ namespace PrivatBank.Controllers
 
             ConsoleUI.Pause();
         }
-
-        #endregion
-
-        #region Settings
-
+               
         private void SettingsMenu()
         {
             while (true)
@@ -1348,10 +1336,7 @@ namespace PrivatBank.Controllers
             ConsoleUI.Pause();
         }
 
-        #endregion
-
-        #region Initialization
-
+       
         private void InitializeDefaultCurrencies()
         {
             currencyService.AddCurrency(new Currency("USD", "US Dollar", "$"));
@@ -1361,6 +1346,5 @@ namespace PrivatBank.Controllers
             dataManager.SaveAllData();
         }
 
-        #endregion
     }
 }

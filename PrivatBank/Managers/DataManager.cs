@@ -27,30 +27,20 @@ namespace PrivatBank.Managers
             this.currencyService = currencyService;
             this.dataPersistence = new DataPersistence();
         }
-
-        /// <summary>
-        /// Load all data from JSON files
-        /// </summary>
+               
         public void LoadAllData()
         {
-            // Load currencies first (needed by wallets)
             LoadCurrencies();
-
-            // Load wallets
+                        
             LoadWallets();
 
-            // Load categories
             LoadExpenseCategories();
             LoadIncomeCategories();
 
-            // Load transactions
             LoadExpenses();
             LoadIncomes();
         }
-
-        /// <summary>
-        /// Save all data to JSON files
-        /// </summary>
+                
         public void SaveAllData()
         {
             SaveWallets();
@@ -61,7 +51,7 @@ namespace PrivatBank.Managers
             SaveCurrencies();
         }
 
-        #region Wallet Management
+   
 
         private void LoadWallets()
         {
@@ -74,18 +64,13 @@ namespace PrivatBank.Managers
 
         private void SaveWallets()
         {
-            // Get reflection to access private wallets list
             var wallets = GetPrivateField<List<Wallet>>(walletService, "wallets");
             if (wallets != null)
             {
                 dataPersistence.SaveWallets(wallets);
             }
         }
-
-        #endregion
-
-        #region Expense Management
-
+                
         private void LoadExpenses()
         {
             var expenseDataList = dataPersistence.LoadExpenses();
@@ -100,7 +85,7 @@ namespace PrivatBank.Managers
                 if (category != null && wallet != null)
                 {
                     var expense = new Expense(category, wallet, expenseData.Sum, expenseData.Date);
-                    // Manually set the ID to match loaded data
+                    
                     SetPrivateField(expense, "Id", expenseData.Id);
                     expenses.Add(expense);
                 }
@@ -134,9 +119,7 @@ namespace PrivatBank.Managers
             }
         }
 
-        #endregion
-
-        #region Income Management
+       
 
         private void LoadIncomes()
         {
@@ -186,9 +169,7 @@ namespace PrivatBank.Managers
             }
         }
 
-        #endregion
-
-        #region Currency Management
+      
 
         private void LoadCurrencies()
         {
@@ -207,14 +188,7 @@ namespace PrivatBank.Managers
                 dataPersistence.SaveCurrencies(currencies);
             }
         }
-
-        #endregion
-
-        #region Reflection Helpers
-
-        /// <summary>
-        /// Helper method to get private field values using reflection
-        /// </summary>
+                
         private T? GetPrivateField<T>(object obj, string fieldName)
         {
             try
@@ -228,10 +202,7 @@ namespace PrivatBank.Managers
                 return default;
             }
         }
-
-        /// <summary>
-        /// Helper method to set private field values using reflection
-        /// </summary>
+                
         private void SetPrivateField(object obj, string fieldName, object? value)
         {
             try
@@ -242,12 +213,11 @@ namespace PrivatBank.Managers
             }
             catch
             {
-                // Silently fail if field can't be set
+               
             }
         }
 
-        #endregion
-
+      
         public bool HasExistingData()
         {
             return dataPersistence.HasData();
